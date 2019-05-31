@@ -2,9 +2,11 @@
   quest works!
 </p>
 
-<div *ngIf="location" (click)="getUnlockedLocations()">
-  <div>{{location.name}}</div> 
-  <!--<img [src]="card.image">  the same thing, but with property binding. -->
+<div *ngIf="location">
+  <div *ngFor="let item of location; index as i">
+    
+  <div>{{item.name}}</div> 
+</div>
 </div>
 <div *ngIf="!location">
   No quest zones available
