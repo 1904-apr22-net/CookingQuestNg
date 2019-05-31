@@ -46,6 +46,8 @@ steps:
     WebAppName: 'CookingQuestNg'
     packageForLinux: 'dist/angular-demo'
 
+    
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'dist/angular-demo'
