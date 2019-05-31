@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./kitchen.component.css']
 })
 export class KitchenComponent implements OnInit {
-  ingredient1 = "Test"
-  ingredient2 = "Test"
-  ingredient3 = "Test"
+  ingredient1 = 'Test';
+  ingredient2 = 'Test';
+  ingredient3 = 'Test';
 
   constructor() { }
 
