@@ -27,6 +27,7 @@ steps:
     scannerMode: 'CLI'
     configMode: 'manual'
     projectKey: 'CookingQuestNg'
+    cliProjectKey: 'CookingQuestNg'
     projectName: 'CookingQuestNg'
     cliSources: 'src'
 
