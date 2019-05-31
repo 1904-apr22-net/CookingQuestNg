@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { KitchenComponent } from './kitchen/kitchen.component';
 import { QuestComponent } from './quest/quest.component';
 import { StoreComponent } from './store/store.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     KitchenComponent,
     QuestComponent,
-    StoreComponent
+    StoreComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
