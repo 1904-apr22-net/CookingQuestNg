@@ -25,9 +25,12 @@ steps:
     SonarCloud: 'Szsaunders-Github'
     organization: 'szsaunders-github'
     scannerMode: 'CLI'
-    # configMode: 'manual'
+    configMode: 'manual'
     projectKey: 'CookingQuestNg'
     projectName: 'CookingQuestNg'
+    cliSources: 'src'
+
+
 
 - script: npm run build-ci
   displayName: 'Build'
@@ -46,6 +49,8 @@ steps:
     appType: 'webAppLinux'
     WebAppName: 'CookingQuestNg'
     packageForLinux: 'dist/angular-demo'
+
+
     
 
 - task: PublishBuildArtifacts@1
