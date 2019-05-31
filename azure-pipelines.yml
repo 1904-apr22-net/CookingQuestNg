@@ -42,7 +42,6 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
@@ -50,8 +49,6 @@ steps:
     appType: 'webApp'
     WebAppName: 'CookingQuestNg'
     packageForLinux: 'dist/angular-demo'
-
-
     
 
 - task: PublishBuildArtifacts@1
