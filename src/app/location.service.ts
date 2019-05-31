@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Location } from './models/location'
+import { Location } from './models/location';
 import { LocationResponse } from './models/location-response';
 
 @Injectable({
@@ -15,12 +15,13 @@ export class LocationService {
     return `https://cookingquest.azurewebsites.net/api/player/locations/${playerId}`;
   }
 
-  getUnlockedLocations(x): Promise<Location> {
-    return this.http.get<LocationResponse>(LocationService.getUnlockedLocationsUrl(x))
+  getUnlockedLocations(x): Promise<Location[]> {
+    return this.http.get<Location[]>(LocationService.getUnlockedLocationsUrl(x))
       .toPromise()
-      .then(function(res) {
-        console.log(res)
-      return res[0]      });
+      .then(res => {
+        console.log(res);
+        return res;
+      });
     // httpclient's "get", etc generic methods
     // auto-deserialize JSON into whatever the generic type parameter is.
     // (in this case, DrawCardResponse.)
