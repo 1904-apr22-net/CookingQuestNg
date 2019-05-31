@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '../models/Location';
+import { LocationService } from '../location.service'
 
 @Component({
   selector: 'app-quest',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestComponent implements OnInit {
 
-  constructor() { }
+  location: Location;
+
+  constructor(private locationSvc: LocationService) { }
 
   ngOnInit() {
+    this.getUnlockedLocations(1)
+  }
+
+  getUnlockedLocations(x) {
+    this.locationSvc.getUnlockedLocations(x).then(res => this.location = res);
   }
 
 }
