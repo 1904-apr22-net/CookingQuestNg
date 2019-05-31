@@ -20,23 +20,23 @@ steps:
 - script: npm run lint
   displayName: 'npm run lint'
 
-# - task: SonarCloudPrepare@1
-#   inputs:
-#     SonarCloud: 'sonarcloud-escalonn'
-#     organization: '1902-feb18-net'
-#     scannerMode: 'CLI'
-#     configMode: 'manual'
-#     cliProjectKey: '1904-ng-card'
-#     cliSources: 'src'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'Szsaunders-Github'
+    organization: 'szsaunders-github'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    projectKey: 'CookingQuestNg'
+    projectName: 'CookingQuestNg'
 
 - script: npm run build-ci
   displayName: 'Build'
 
-# - task: SonarCloudAnalyze@1
+- task: SonarCloudAnalyze@1
 
-# - task: SonarCloudPublish@1
-#   inputs:
-#     pollingTimeoutSec: '300'
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 
 - task: AzureRmWebAppDeployment@4
