@@ -1,0 +1,53 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool: Default
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: npm ci
+  displayName: 'npm install'
+
+- script: npm run lint
+  displayName: 'npm run lint'
+
+# - task: SonarCloudPrepare@1
+#   inputs:
+#     SonarCloud: 'sonarcloud-escalonn'
+#     organization: '1902-feb18-net'
+#     scannerMode: 'CLI'
+#     configMode: 'manual'
+#     cliProjectKey: '1904-ng-card'
+#     cliSources: 'src'
+
+- script: npm run build-ci
+  displayName: 'Build'
+
+# - task: SonarCloudAnalyze@1
+
+# - task: SonarCloudPublish@1
+#   inputs:
+#     pollingTimeoutSec: '300'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Pay-As-You-Go(6b0c24ca-82f5-4ae0-9ad3-0c0422d6ef66)'
+    appType: 'webApp'
+    WebAppName: 'CookingQuestNg'
+    packageForLinux: 'dist/angular-demo'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'dist/angular-demo'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
