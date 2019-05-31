@@ -17,8 +17,8 @@ steps:
 - script: npm ci
   displayName: 'npm install'
 
-- script: npm run lint
-  displayName: 'npm run lint'
+# - script: npm run lint
+#   displayName: 'npm run lint'
 
 # - task: SonarCloudPrepare@1
 #   inputs:
