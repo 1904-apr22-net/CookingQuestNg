@@ -47,7 +47,7 @@ steps:
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Pay-As-You-Go(6b0c24ca-82f5-4ae0-9ad3-0c0422d6ef66)'
-    appType: 'webAppLinux'
+    appType: 'webApp'
     WebAppName: 'CookingQuestNg'
     packageForLinux: 'dist/angular-demo'
 
