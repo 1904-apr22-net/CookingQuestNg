@@ -1,13 +1,19 @@
 <p>
-  quest works!
+  Welcome to the Questing Hub! Choose one of the questzones below and see what you find!
 </p>
 
-<div *ngIf="location">
-  <div *ngFor="let item of location; index as i">
+<div *ngIf="locations">
+  <div *ngFor="let item of locations; index as i">
     
-  <div>{{item.name}}</div> 
+  <button [value]="item.locationId" (click)="onClickMe($event)">{{item.name}}</button> 
 </div>
 </div>
-<div *ngIf="!location">
-  No quest zones available
+<div *ngIf="!locations">
+  No quest zones available currently. Try again in a bit.
 </div>
+<div *ngIf="loot">
+    <div *ngFor="let lootitem of loot; index as i">
+      
+    <div>{{lootitem.name}}</div>
+  </div>
+  </div>

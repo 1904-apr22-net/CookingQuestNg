@@ -1,6 +1,6 @@
 export interface Location {
   name: string;
   description: string;
-  id: number;
+  locationId: number;
   difficulty: number;
 }
