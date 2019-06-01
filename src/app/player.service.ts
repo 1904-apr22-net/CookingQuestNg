@@ -26,6 +26,5 @@ export class PlayerService {
     // (in this case, DrawCardResponse.)
   }
 
-  Equipment
   constructor(private http: HttpClient) { }
 }

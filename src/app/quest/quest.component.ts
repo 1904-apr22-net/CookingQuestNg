@@ -37,5 +37,4 @@ export class QuestComponent implements OnInit {
     this.locationSvc.getQuestLoot(x.target.value).then(res => this.loot = res);
   }
 
-  
 }
