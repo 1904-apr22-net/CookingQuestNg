@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '../models/Location';
+import { Location } from '../models/location';
 import { LocationService } from '../location.service';
 
 @Component({
