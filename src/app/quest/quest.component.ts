@@ -24,8 +24,6 @@ export class QuestComponent implements OnInit {
     this.locationSvc.getUnlockedLocations(x).then(res => this.locations = res);
   }
 
- 
-
   onClickMe(x) {
     this.locationSvc.getQuestLoot(x.target.value).then(res => this.loot = res);
   }
