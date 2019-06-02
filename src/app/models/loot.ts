@@ -7,5 +7,5 @@ export interface Loot {
   playerLootId: number;
   price: number;
   quantity: number;
-  flavor: Flavor
+  flavor: Flavor;
 }

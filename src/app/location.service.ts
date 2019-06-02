@@ -18,8 +18,8 @@ export class LocationService {
   }
 
 
-  getQuestLoot(x,v): Promise<Loot[]> {
-    return this.http.get<Loot[]>(LocationService.getLocationLootUrl(x,v))
+  getQuestLoot(x, v): Promise<Loot[]> {
+    return this.http.get<Loot[]>(LocationService.getLocationLootUrl(x, v))
       .toPromise()
       .then(res => {
         console.log(res);
