@@ -26,7 +26,7 @@
               Select What Loot You Want To Sell
             </button>
             <div *ngFor="let lootitem of playerloot" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item">{{lootitem.name}}</a>
+              <a class="dropdown-item" (click)="sellLoot(item, lootitem)">{{lootitem.name}}</a>
             </div>
           </div>
         
@@ -36,7 +36,6 @@
   <div class="jumbotron">
       <h1 class="display-4">Equipment Booth</h1>
       <p class="lead">Buy new equipment for dungeondiving or cooking!</p>
-      <button class="btn btn-danger" (click)="test()">Clear Out Bought Items</button>
       <hr class="my-4">
       <table class="table">
           <thead>
@@ -55,7 +54,7 @@
               <td>{{item.modifier}}</td>
               <td>{{item.type}}</td>
               <td>{{item.price}} gp</td>
-              <td><button class="btn btn-danger" (click)="buyEquipment()">Purchase</button> </td>
+              <td><button class="btn btn-danger" [value]="item.name" (click)="buyEquipment($event)">Purchase</button> </td>
             </ng-container>
             </tr>
           </tbody>

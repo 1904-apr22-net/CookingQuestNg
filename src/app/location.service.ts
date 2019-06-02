@@ -13,13 +13,13 @@ export class LocationService {
 
 
 
-  private static getLocationLootUrl(locationId: number = 1): string {
-    return `https://cookingquest.azurewebsites.net/api/location/quest/${locationId}`;
+  private static getLocationLootUrl(locationId: number = 1, modifier: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/location/quest/${locationId}/${modifier}`;
   }
 
 
-  getQuestLoot(x): Promise<Loot[]> {
-    return this.http.get<Loot[]>(LocationService.getLocationLootUrl(x))
+  getQuestLoot(x,v): Promise<Loot[]> {
+    return this.http.get<Loot[]>(LocationService.getLocationLootUrl(x,v))
       .toPromise()
       .then(res => {
         console.log(res);

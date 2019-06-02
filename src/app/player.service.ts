@@ -42,6 +42,10 @@ export class PlayerService {
     return `https://cookingquest.azurewebsites.net/api/player/postequipment/${playerId}`;
   }
 
+  private static deleteLoot(playerLootId: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/player/deleteloot/${playerLootId}`;
+  }
+
 
   getPlayerEquipment(x): Promise<Equipment[]> {
     return this.http.get<Equipment[]>(PlayerService.getPlayerEquipment(x))
@@ -97,11 +101,21 @@ export class PlayerService {
   }
 
   addEquipment(id: number, equipment: Equipment): Promise<boolean> {
-    return this.http.post<boolean>(PlayerService.postNewEquip(id), equipment)
+    return this.http.post<boolean>(PlayerService.postNewEquip(id), equipment, PlayerService.httpOptions)
     .toPromise()
     .then(res => {
       console.log(res);
       return res;
     });
   }
+
+  deleteLoot(playerLootId: number): Promise<boolean> {
+    return this.http.delete<boolean>(PlayerService.deleteLoot(playerLootId))
+    .toPromise()
+    .then(res => {
+      console.log(res);
+      return res;
+    });
+  }
+
 }

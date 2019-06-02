@@ -50,8 +50,7 @@ export class StoreComponent implements OnInit {
   equipmentReducer = (prev, current) => (prev.difficulty > current.difficulty) ? prev : current;
 
   upgradeVoucher() {
-    console.log('function\'s triggering');
-    this.nextvoucher = this.allEquipment.find(q => q.type === 'Voucher' && q.difficulty === this.voucher.difficulty);
+    this.nextvoucher = this.allEquipment.find(q => q.type === 'Voucher' && q.difficulty === this.voucher.difficulty +1);
     if (this.nextvoucher.price < this.player.gold) {
       this.player.gold -= this.voucher.price;
       this.playerSvc.editPlayer(this.player).then(() => {
@@ -62,6 +61,17 @@ export class StoreComponent implements OnInit {
     }
   }
 
+  sellLoot( store : Store , loot: Loot) {
+    console.log(store,loot)
+    let bonus = store.flavors.find(z => z.name === loot.flavor.name).bonus;
+    this.player.gold += this.playerloot.find(q => q.name === loot.name).quantity * 
+    this.playerloot.find(q => q.name === loot.name).price * bonus;
+    this.playerSvc.editPlayer(this.player).then(() => {
+      this.playerSvc.deleteLoot(this.playerloot.find(q => q.name === loot.name).playerLootId).then(() => {
+        this.getPlayer(2);
+      });
+    });
+  }
 
   getPlayerLoot(x) {
     this.playerSvc.getPlayerLoot(x).then(res => this.playerloot = res);
@@ -73,4 +83,18 @@ export class StoreComponent implements OnInit {
     this.getPlayerEquipment(x);
   }
 
+  buyEquipment(event) {
+    console.log(event.target.value)
+    let equipment = this.allEquipment.filter(x=> x.name == event.target.value)[0]
+    if (equipment.price < this.player.gold) {
+      this.player.gold -= this.voucher.price;
+      this.playerSvc.editPlayer(this.player).then(() => {
+        this.playerSvc.addEquipment(this.player.playerId, this.nextvoucher).then(() => {
+          this.getPlayer(2);
+        });
+      });
+    }
+  }
+
+  
 }

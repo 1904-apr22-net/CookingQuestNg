@@ -33,7 +33,8 @@ export class QuestComponent implements OnInit {
   }
 
   getPlayerEquipment(x) {
-    this.playerSvc.getPlayerEquipment(x).then(res => this.equipment = res);
+    this.playerSvc.getPlayerEquipment(x).then(res => {this.equipment = res; this.selectedEquipment = res[0]});
+  
   }
 
   getPlayerLoot(x) {
@@ -41,10 +42,15 @@ export class QuestComponent implements OnInit {
   }
 
   onClickMe(x) {
-    this.locationSvc.getQuestLoot(x.target.value).then(res => this.loot = res);
+    this.locationSvc.getQuestLoot(x.target.value,this.selectedEquipment.modifier).then(res => this.loot = res);
     if (this.loot) {
       this.playerSvc.addPlayerLoot(2, this.loot[0]);
     }
+  }
+
+  selectEquipment(equip) {
+    this.selectedEquipment = equip;
+    console.log(this.selectedEquipment)
   }
 
   getPlayer(x) {
