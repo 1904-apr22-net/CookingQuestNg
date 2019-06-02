@@ -1,34 +1,34 @@
-<p>
-  store works!
-</p>
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="jumbotron">
+    <p class="lead">Sell loot, buy equipment. You have {{player.gold}} gold.</p>
+    <hr class="my-4">
+  </div>
+
+<div class="jumbotron">
+    <h1 class="display-4">Vouchers</h1>
+    <p class="lead">The better your voucher, the more stores you can access and the more equipment you can buy. Press the button below to upgrade your voucher.</p>
+    <hr class="my-4">
+    <p class="lead">Your current voucher is...{{voucher.name}}</p>
+    <p class="lead">
+      <div *ngIf="voucher.difficulty < 6">
+        <button class="btn btn-danger btn-lg" (click)="upgradeVoucher">Upgrade Voucher</button> 
+    </p>
+  </div>
+
+<div *ngFor="let item of stores; index as i">
+    <div *ngIf="item.difficulty <= voucher.difficulty"></div>
+    <div class="jumbotron">
+        <h1 class="display-4">{{item.name}}</h1>
+        <p class="lead">{{item.description}}</p>
+        <hr class="my-4">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select What Loot You Want To Sell
+            </button>
+            <div *ngFor="let lootitem of loot" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item">{{lootitem.name}}</a>
+            </div>
+          </div>
+        
+      </div>
+  </div>

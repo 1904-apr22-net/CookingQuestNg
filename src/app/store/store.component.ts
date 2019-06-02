@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from '../location.service';
 import { Loot } from '../models/loot';
-import { Location } from '../models/location';
 import { Player } from '../models/player';
 import { Equipment } from '../models/equipment';
 import { PlayerService } from '../player.service';
@@ -16,18 +14,18 @@ import { StoreService } from '../store.service';
 export class StoreComponent implements OnInit {
 
   equipment: Equipment[];
-  selectedEquipment: Equipment;
+  voucher: Equipment;
+  nextvoucher: Equipment;
   playerloot: Loot[];
   locationid: number;
   player: Player;
   stores: Store[];
 
-  constructor(private storeSvc: StoreService, private locationSvc: LocationService, private playerSvc: PlayerService) { }
+  constructor(private storeSvc: StoreService, private playerSvc: PlayerService) { }
 
   ngOnInit() {
     this.getStores();
     this.getPlayer(1);
-    console.log(this.stores);
   }
 
   getStores() {
@@ -35,9 +33,22 @@ export class StoreComponent implements OnInit {
   }
 
   getPlayerEquipment(x) {
-    this.playerSvc.getPlayerEquipment(x).then(res => this.equipment = res);
+    this.playerSvc.getPlayerEquipment(x).then(res => {this.equipment = res.filter(x => x.type != "Voucher"); this.voucher = res.filter(x => x.type == "Voucher").reduce(this.EquipmentReducer);
+    this.nextvoucher = res.find(x => x.type == "Voucher" && x.difficulty == this.voucher.difficulty + 1) ? res.find(x => x.type == "Voucher" && x.difficulty == this.voucher.difficulty + 1) : null;
+    this.stores = this.stores.filter(x => x.difficulty <= this.voucher.difficulty)  
+  });
   }
+  EquipmentReducer = (prev, current) => (prev.difficulty > current.difficulty) ? prev : current;
 
+  UpgradeVoucher() {
+    if (this.nextvoucher.price < this.player.gold) {
+      this.player.gold -= this.nextvoucher.price;
+
+
+      this.getPlayerEquipment(1)
+    }
+  }
+  
   getPlayerLoot(x) {
     this.playerSvc.getPlayerLoot(x).then(res => this.playerloot = res);
   }

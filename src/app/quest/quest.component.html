@@ -3,12 +3,10 @@
 </h2>
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown button
+      Equipment Selector
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
+    <div *ngFor="let equip of equipment" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item">{{equip.name}}</a>
     </div>
   </div>
 <!-- <div *ngIf="locations">
@@ -30,15 +28,38 @@
         <p>Click the button below to adventure here. See what loot you get!</p>
  
         <p class="lead">
-            <button class="btn btn-primary btn-lg" [value]="item.locationId" (click)="onClickMe($event)">{{item.name}}</button> 
+            <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal" [value]="item.locationId" (click)="onClickMe($event)">{{item.name}}</button> 
         </p>
       </div>
   </div>
 
 
-<div *ngIf="loot">
-    <div *ngFor="let lootitem of loot; index as i">
-      
-    <div>{{lootitem.name}}</div>
-  </div>
-  </div>
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Here's your haul from the last quest!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div *ngIf="loot">
+                  <div *ngFor="let lootitem of loot; index as i">
+                    
+                  <div>{{lootitem.name}}</div>
+                </div>
+                </div>
+                <hr>
+                Your loot's been added to your inventory. Now go questing again!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
