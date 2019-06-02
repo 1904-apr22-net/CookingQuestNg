@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from './models/location';
-import { Equipment } from './models/Equipment';
+import { Equipment } from './equipment';
 import { Loot } from './models/loot';
 import { Player } from './models/player';
 

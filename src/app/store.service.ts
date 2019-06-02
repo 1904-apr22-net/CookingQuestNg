@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Equipment } from './models/Equipment';
+import { Equipment } from './equipment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Loot } from './models/loot';
 import { Store } from './models/store';

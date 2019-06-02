@@ -1,4 +1,4 @@
-import { Equipment } from './equipment';
+import { Equipment } from '../equipment';
 import { Loot } from './loot';
 import { Location } from './location';
 

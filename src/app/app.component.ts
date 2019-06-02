@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from './location.service';
 import { PlayerService } from './player.service';
-import { Equipment } from './models/equipment';
+import { Equipment } from './equipment';
 import { Loot } from './models/loot';
 import { Location } from './models/location';
 import { Player } from './models/player';

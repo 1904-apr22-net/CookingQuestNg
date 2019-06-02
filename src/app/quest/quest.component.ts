@@ -3,7 +3,7 @@ import { Location } from '../models/location';
 import { Loot } from '../models/loot';
 import { LocationService } from '../location.service';
 import { PlayerService } from '../player.service';
-import { Equipment } from '../models/equipment';
+import { Equipment } from '../equipment';
 import { Player } from '../models/player';
 
 @Component({
