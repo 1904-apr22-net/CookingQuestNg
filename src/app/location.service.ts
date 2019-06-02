@@ -12,25 +12,11 @@ export class LocationService {
   private static newPlayerUrl = 'https://cookingquest.azurewebsites.net/api/player';
 
 
-  private static getUnlockedLocationsUrl(playerId: number = 1): string {
-    return `https://cookingquest.azurewebsites.net/api/player/locations/${playerId}`;
-  }
 
   private static getLocationLootUrl(locationId: number = 1): string {
     return `https://cookingquest.azurewebsites.net/api/location/quest/${locationId}`;
   }
 
-  getUnlockedLocations(x): Promise<Location[]> {
-    return this.http.get<Location[]>(LocationService.getUnlockedLocationsUrl(x))
-      .toPromise()
-      .then(res => {
-        console.log(res);
-        return res;
-      });
-    // httpclient's "get", etc generic methods
-    // auto-deserialize JSON into whatever the generic type parameter is.
-    // (in this case, DrawCardResponse.)
-  }
 
   getQuestLoot(x): Promise<Loot[]> {
     return this.http.get<Loot[]>(LocationService.getLocationLootUrl(x))

@@ -7,6 +7,7 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 import { QuestComponent } from './quest/quest.component';
 import { StoreComponent } from './store/store.component';
 import { HomeComponent } from './home/home.component';
+import { NgxPopper } from 'angular-popper';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPopper
   ],
   providers: [],
   bootstrap: [AppComponent]

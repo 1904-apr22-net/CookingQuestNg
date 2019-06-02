@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Location } from './models/location';
 import { Equipment } from './models/Equipment';
 import { Loot } from './models/loot';
+import { Player } from './models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +15,56 @@ export class PlayerService {
     return `https://cookingquest.azurewebsites.net/api/Player/Equipment/${playerId}`;
   }
 
-  getUnlockedLocations(x): Promise<Equipment[]> {
+  private static getPlayerLoot(playerId: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/Player/Loot/${playerId}`;
+  }
+
+  private static getPlayer(playerId: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/Player/${playerId}`;
+  }
+
+  private static getUnlockedLocationsUrl(playerId: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/player/locations/${playerId}`;
+  }
+
+
+
+  getPlayerEquipment(x): Promise<Equipment[]> {
     return this.http.get<Equipment[]>(PlayerService.getPlayerEquipment(x))
       .toPromise()
       .then(res => {
         console.log(res);
         return res;
       });
-    // httpclient's "get", etc generic methods
-    // auto-deserialize JSON into whatever the generic type parameter is.
-    // (in this case, DrawCardResponse.)
   }
 
+  getPlayerLoot(x): Promise<Loot[]> {
+    return this.http.get<Loot[]>(PlayerService.getPlayerLoot(x))
+      .toPromise()
+      .then(res => {
+        console.log(res);
+        return res;
+      });
+  }
+
+
+
+  getPlayer(x): Promise<Player> {
+    return this.http.get<Player>(PlayerService.getPlayer(x))
+      .toPromise()
+      .then(res => {
+        console.log(res);
+        return res;
+      });
+  }
+
+  getUnlockedLocations(x): Promise<Location[]> {
+    return this.http.get<Location[]>(PlayerService.getUnlockedLocationsUrl(x))
+      .toPromise()
+      .then(res => {
+        console.log(res);
+        return res;
+      });
+    }
   constructor(private http: HttpClient) { }
 }
