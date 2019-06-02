@@ -72,14 +72,14 @@ export class PlayerService {
     }
 
   addPlayerLoot(i, x) {
-    return this.http.post(PlayerService.postNewLoot(i), 
+    return this.http.post(PlayerService.postNewLoot(i),
     {
-      'name': x.name,
-      'description': x.description,
-      'quantity': 1,
-      'lootId': x.lootId
-    })
-    
+      name: x.name,
+      description: x.description,
+      quantity: 1,
+      lootId: x.lootId
+    });
+
   }
 
   constructor(private http: HttpClient) { }

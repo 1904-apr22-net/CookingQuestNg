@@ -43,7 +43,7 @@ export class QuestComponent implements OnInit {
   onClickMe(x) {
     this.locationSvc.getQuestLoot(x.target.value).then(res => this.loot = res);
     if (this.loot) {
-      this.playerSvc.addPlayerLoot(2,this.loot[0])
+      this.playerSvc.addPlayerLoot(2, this.loot[0]);
     }
   }
 
