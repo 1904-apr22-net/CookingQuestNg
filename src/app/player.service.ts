@@ -27,6 +27,10 @@ export class PlayerService {
     return `https://cookingquest.azurewebsites.net/api/player/locations/${playerId}`;
   }
 
+  private static postNewLoot(playerId: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/player/newloot/${playerId}`;
+  }
+
 
 
   getPlayerEquipment(x): Promise<Equipment[]> {
@@ -66,5 +70,17 @@ export class PlayerService {
         return res;
       });
     }
+
+  addPlayerLoot(i, x) {
+    return this.http.post(PlayerService.postNewLoot(i), 
+    {
+      'name': x.name,
+      'description': x.description,
+      'quantity': 1,
+      'lootId': x.lootId
+    })
+    
+  }
+
   constructor(private http: HttpClient) { }
 }

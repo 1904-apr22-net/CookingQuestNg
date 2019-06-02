@@ -6,4 +6,5 @@ export interface Equipment {
   price: number;
   type: string;
   playerEquipmentId: number;
+  modifier: number;
 }
