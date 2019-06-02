@@ -11,8 +11,8 @@
     <p class="lead">Your current voucher is...{{voucher.name}}</p>
     <p class="lead">
       <div *ngIf="voucher.difficulty < 6">
-        <button class="btn btn-danger btn-lg" (click)="upgradeVoucher">Upgrade Voucher</button> 
-    </p>
+        <button class="btn btn-danger btn-lg" (click)="upgradeVoucher()">Upgrade Voucher</button> 
+      </div>
   </div>
 
 <div *ngFor="let item of stores; index as i">
@@ -25,10 +25,39 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Select What Loot You Want To Sell
             </button>
-            <div *ngFor="let lootitem of loot" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div *ngFor="let lootitem of playerloot" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item">{{lootitem.name}}</a>
             </div>
           </div>
         
       </div>
   </div>
+
+  <div class="jumbotron">
+      <h1 class="display-4">Equipment Booth</h1>
+      <p class="lead">Buy new equipment for dungeondiving or cooking!</p>
+      <button class="btn btn-danger" (click)="test()">Clear Out Bought Items</button>
+      <hr class="my-4">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Modifier</th>
+              <th scope="col">Type</th>
+              <th scope="col">Price</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of allEquipment">
+              <ng-container *ngIf="item.type !== 'Voucher'">
+              <th scope="row">{{item.name}}</th>
+              <td>{{item.modifier}}</td>
+              <td>{{item.type}}</td>
+              <td>{{item.price}} gp</td>
+              <td><button class="btn btn-danger" (click)="buyEquipment()">Purchase</button> </td>
+            </ng-container>
+            </tr>
+          </tbody>
+        </table>
+        </div>

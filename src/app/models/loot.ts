@@ -1,7 +1,7 @@
 export interface Loot {
   name: string;
   description: string;
-  id: number;
+  lootId: number;
   price: number;
   quantity: number;
 }

@@ -14,6 +14,7 @@ import { StoreService } from '../store.service';
 export class StoreComponent implements OnInit {
 
   equipment: Equipment[];
+  allEquipment: Equipment[];
   voucher: Equipment;
   nextvoucher: Equipment;
   playerloot: Loot[];
@@ -25,30 +26,43 @@ export class StoreComponent implements OnInit {
 
   ngOnInit() {
     this.getStores();
-    this.getPlayer(1);
+    this.getPlayer(2);
   }
 
   getStores() {
   this.storeSvc.getAllStores().then(res => this.stores = res);
   }
+  getEquipment() {
+    this.storeSvc.getAllEquipment().then(res => this.allEquipment = res);
+  }
 
   getPlayerEquipment(x) {
-    this.playerSvc.getPlayerEquipment(x).then(res => {this.equipment = res.filter(x => x.type != "Voucher"); this.voucher = res.filter(x => x.type == "Voucher").reduce(this.EquipmentReducer);
-    this.nextvoucher = res.find(x => x.type == "Voucher" && x.difficulty == this.voucher.difficulty + 1) ? res.find(x => x.type == "Voucher" && x.difficulty == this.voucher.difficulty + 1) : null;
-    this.stores = this.stores.filter(x => x.difficulty <= this.voucher.difficulty)  
+    this.playerSvc.getPlayerEquipment(x).then(res => {this.equipment = res.filter(w => w.type !== 'Voucher');
+                                                      this.voucher = res.filter(q => q.type === 'Voucher').reduce(this.equipmentReducer);
+                                                      this.stores = this.stores.filter(z => z.difficulty <= this.voucher.difficulty);
+                                                      this.getEquipment();
+
+                                                      // this.storeSvc.getAllEquipment().
+                                                      // then(res2 => this.allEquipment = res2.filter
+                                                      // (r => this.equipment.filter(e => e.name !== r.name).length > 0));
   });
   }
-  EquipmentReducer = (prev, current) => (prev.difficulty > current.difficulty) ? prev : current;
+  equipmentReducer = (prev, current) => (prev.difficulty > current.difficulty) ? prev : current;
 
-  UpgradeVoucher() {
+  upgradeVoucher() {
+    console.log('function\'s triggering');
+    this.nextvoucher = this.allEquipment.find(q => q.type === 'Voucher' && q.difficulty === this.voucher.difficulty);
     if (this.nextvoucher.price < this.player.gold) {
-      this.player.gold -= this.nextvoucher.price;
-
-
-      this.getPlayerEquipment(1)
+      this.player.gold -= this.voucher.price;
+      this.playerSvc.editPlayer(this.player).then(() => {
+        this.playerSvc.addEquipment(this.player.playerId, this.nextvoucher).then(() => {
+          this.getPlayer(2);
+        });
+      });
     }
   }
-  
+
+
   getPlayerLoot(x) {
     this.playerSvc.getPlayerLoot(x).then(res => this.playerloot = res);
   }

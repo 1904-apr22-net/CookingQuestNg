@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from './models/location';
 import { Equipment } from './models/Equipment';
 import { Loot } from './models/loot';
@@ -9,7 +9,14 @@ import { Player } from './models/player';
   providedIn: 'root'
 })
 export class PlayerService {
+  constructor(private http: HttpClient) { }
   private static newPlayerUrl = 'https://cookingquest.azurewebsites.net/api/player';
+
+  private static httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   private static getPlayerEquipment(playerId: number = 1): string {
     return `https://cookingquest.azurewebsites.net/api/Player/Equipment/${playerId}`;
@@ -31,6 +38,9 @@ export class PlayerService {
     return `https://cookingquest.azurewebsites.net/api/player/newloot/${playerId}`;
   }
 
+  private static postNewEquip(playerId: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/player/postequipment/${playerId}`;
+  }
 
 
   getPlayerEquipment(x): Promise<Equipment[]> {
@@ -71,18 +81,27 @@ export class PlayerService {
       });
     }
 
-  addPlayerLoot(i, x) {
-    return this.http.post(PlayerService.postNewLoot(i),
-    {
-      name: x.name,
-      description: x.description,
-      quantity: 1,
-      lootId: x.lootId
-    });
+  addPlayerLoot(i: number, x: Loot) {
+    return this.http.post(PlayerService.postNewLoot(i), x);
 
   }
 
-  
+  editPlayer(player: Player): Promise<boolean> {
+    console.log(player);
+    return this.http.put<boolean>(PlayerService.getPlayer(player.playerId), player, PlayerService.httpOptions)
+    .toPromise()
+    .then(res => {
+      console.log(res);
+      return res;
+    });
+  }
 
-  constructor(private http: HttpClient) { }
+  addEquipment(id: number, equipment: Equipment): Promise<boolean> {
+    return this.http.post<boolean>(PlayerService.postNewEquip(id), equipment)
+    .toPromise()
+    .then(res => {
+      console.log(res);
+      return res;
+    });
+  }
 }
