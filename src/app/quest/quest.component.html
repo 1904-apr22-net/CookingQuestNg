@@ -5,8 +5,12 @@
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Equipment Selector
     </button>
-    <div *ngFor="let equip of equipment" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" (click)="selectEquipment(equip)">{{equip.name}}</a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <ng-container *ngFor="let equip of equipment">
+            <ng-container *ngIf="equip.type == 'Dungeon'">
+            <a class="dropdown-item" (click)="selectEquipment(equip)">{{equip.name}}</a>
+          </ng-container>
+        </ng-container>
     </div>
   </div>
 <!-- <div *ngIf="locations">

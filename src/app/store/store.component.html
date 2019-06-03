@@ -25,11 +25,14 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Select What Loot You Want To Sell
             </button>
-            <div *ngFor="let lootitem of playerloot" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <ng-container *ngFor="let lootitem of playerloot">
               <a class="dropdown-item" (click)="sellLoot(item, lootitem)">{{lootitem.name}}</a>
+            </ng-container>
             </div>
           </div>
-        
+          <hr class="my-4">
+            <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal" [value]="item" (click)="onClickMe($event)">Cook</button> 
       </div>
   </div>
 
@@ -54,9 +57,63 @@
               <td>{{item.modifier}}</td>
               <td>{{item.type}}</td>
               <td>{{item.price}} gp</td>
-              <td><button class="btn btn-danger" [value]="item.name" (click)="buyEquipment($event)">Purchase</button> </td>
+              <td><button class="btn btn-danger" [value]="item.name" (click)="buyEquipmentNew($event)">Purchase</button> </td>
             </ng-container>
             </tr>
           </tbody>
         </table>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Cooking Menu!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    Select three different loot objects from your inventory. If they make a good meal, you'll get a bonus!
+                    <hr>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Ingredient 1
+                        </button>
+                        <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <ng-container *ngFor="let lootitem of playerloot">
+                          <a class="dropdown-item" (click)="ingredient1(lootitem)">{{lootitem.name}}</a>
+                        </ng-container>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Ingredient 2
+                          </button>
+                          <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <ng-container *ngFor="let lootitem of playerloot">
+                            <a class="dropdown-item" (click)="ingredient2(lootitem)">{{lootitem.name}}</a>
+                          </ng-container>
+                          </div>
+                        </div>
+                        <hr>
+                      <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Ingredient 3
+                          </button>
+                          <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <ng-container *ngFor="let lootitem of playerloot">
+                            <a class="dropdown-item" (click)="ingredient3(lootitem)">{{lootitem.name}}</a>
+                          </ng-container>
+                          </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="cooker()" data-dismiss="modal">Cook</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      
+                </div>
+              </div>
+            </div>
+          </div>

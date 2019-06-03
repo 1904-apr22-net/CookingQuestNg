@@ -20,12 +20,13 @@ export class QuestComponent implements OnInit {
   loot: Loot[];
   locationid: number;
   player: Player;
+  cookloot: Loot[];
 
   constructor(private locationSvc: LocationService, private playerSvc: PlayerService) { }
 
   ngOnInit() {
-    this.getUnlockedLocations(1);
-    this.getPlayerEquipment(1);
+    this.getUnlockedLocations(2);
+    this.getPlayerEquipment(2);
   }
 
   getUnlockedLocations(x) {
@@ -42,11 +43,23 @@ export class QuestComponent implements OnInit {
   }
 
   onClickMe(x) {
-    this.locationSvc.getQuestLoot(x.target.value, this.selectedEquipment.modifier).then(res => this.loot = res);
-    if (this.loot) {
-      this.playerSvc.addPlayerLoot(2, this.loot[0]);
+    this.locationSvc.getQuestLoot(x.target.value, this.selectedEquipment.modifier).then(res => {this.loot = res;
+                                                                                                if (this.loot) {
+        this.loot.forEach(z => z.quantity = 1);
+        this.playerSvc.addPlayerLootArr(2, this.loot);
+        }});
+
     }
-  }
+
+    // onClickMe(x) {
+    //   this.locationSvc.getQuestLoot(x.target.value, this.selectedEquipment.modifier).then(res => {this.loot = res;
+    //                                                                                               if (this.loot) {
+    //       this.loot.map(x => x.quantity = 1);
+    //       this.playerSvc.addPlayerLoot(2, this.loot[0]);
+    //       }});
+
+    //   }
+
 
   selectEquipment(equip) {
     this.selectedEquipment = equip;

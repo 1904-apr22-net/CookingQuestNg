@@ -37,6 +37,9 @@ export class PlayerService {
   private static postNewLoot(playerId: number = 1): string {
     return `https://cookingquest.azurewebsites.net/api/player/newloot/${playerId}`;
   }
+  private static postNewLootArr(playerId: number = 1): string {
+    return `https://cookingquest.azurewebsites.net/api/player/newlootarr/${playerId}`;
+  }
 
   private static postNewEquip(playerId: number = 1): string {
     return `https://cookingquest.azurewebsites.net/api/player/postequipment/${playerId}`;
@@ -85,9 +88,24 @@ export class PlayerService {
       });
     }
 
-  addPlayerLoot(i: number, x: Loot) {
-    return this.http.post(PlayerService.postNewLoot(i), x);
 
+
+  addPlayerLoot(id: number, loot: Loot): Promise<boolean> {
+    return this.http.post<boolean>(PlayerService.postNewLoot(id), loot, PlayerService.httpOptions)
+    .toPromise()
+    .then(res => {
+      console.log(res);
+      return res;
+    });
+  }
+
+  addPlayerLootArr(id: number, loot: Loot[]): Promise<boolean> {
+    return this.http.post<boolean>(PlayerService.postNewLootArr(id), loot, PlayerService.httpOptions)
+    .toPromise()
+    .then(res => {
+      console.log(res);
+      return res;
+    });
   }
 
   editPlayer(player: Player): Promise<boolean> {
