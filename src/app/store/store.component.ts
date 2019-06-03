@@ -107,7 +107,7 @@ export class StoreComponent implements OnInit {
   buyEquipmentNew(event) {
     console.log(event.target.value);
     const equipment = this.allEquipment.filter(x => x.name === event.target.value)[0];
-    if (equipment.price < this.player.gold) {
+    if (equipment.price <= this.player.gold) {
       this.player.gold -= equipment.price;
       this.playerSvc.editPlayer(this.player).then(() => {
         this.playerSvc.addEquipment(this.player.playerId, equipment).then(() => {
