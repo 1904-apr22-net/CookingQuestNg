@@ -31,10 +31,10 @@ export class StoreComponent implements OnInit {
 
   ngOnInit() {
     this.getStores();
-    this.getPlayerEquipment(2);
     this.getPlayer(2);
     this.getPlayerLoot(2);
     this.getEquipment();
+    this.getPlayerEquipment(2);
 
   }
 
