@@ -38,6 +38,14 @@ export class StoreComponent implements OnInit {
 
   }
 
+  update(){
+    this.getStores();
+    this.getPlayer(2);
+    this.getPlayerLoot(2);
+    this.getEquipment();
+    this.getPlayerEquipment(2);
+  }
+
   getStores() {
   this.storeSvc.getAllStores().then(res => this.stores = res);
   }
@@ -50,7 +58,7 @@ export class StoreComponent implements OnInit {
       // this.equipment = res.filter(w => w.type !== 'Voucher');
                                                       this.voucher = res.filter(q => q.type === 'Voucher').reduce(this.equipmentReducer);
                                                       this.stores = this.stores.filter(z => z.difficulty <= this.voucher.difficulty);
-
+                                                      this.update();
                                                       // this.storeSvc.getAllEquipment().
                                                       // then(res2 => this.allEquipment = res2.filter
                                                       // (r => this.equipment.filter(e => e.name !== r.name).length > 0));
@@ -65,7 +73,7 @@ export class StoreComponent implements OnInit {
       this.player.gold -= this.nextvoucher.price;
       this.playerSvc.editPlayer(this.player).then(() => {
         this.playerSvc.addEquipment(this.player.playerId, this.nextvoucher).then(() => {
-          this.getPlayer(2);
+          this.update();
         });
       });
     }
@@ -78,7 +86,7 @@ export class StoreComponent implements OnInit {
     this.playerloot.find(q => q.name === loot.name).price * bonus;
     this.playerSvc.editPlayer(this.player).then(() => {
       this.playerSvc.deleteLoot(this.playerloot.find(q => q.name === loot.name).playerLootId).then(() => {
-        this.getPlayer(2);
+        this.update();
       });
     });
   }
@@ -98,7 +106,7 @@ export class StoreComponent implements OnInit {
       this.player.gold -= this.voucher.price;
       this.playerSvc.editPlayer(this.player).then(() => {
         this.playerSvc.addEquipment(this.player.playerId, this.nextvoucher).then(() => {
-          this.getPlayer(2);
+          this.update();
         });
       });
     }
@@ -111,7 +119,7 @@ export class StoreComponent implements OnInit {
       this.player.gold -= equipment.price;
       this.playerSvc.editPlayer(this.player).then(() => {
         this.playerSvc.addEquipment(this.player.playerId, equipment).then(() => {
-          this.getPlayer(2);
+          this.update();
         });
       });
     }
@@ -143,7 +151,7 @@ export class StoreComponent implements OnInit {
         this.playerSvc.editPlayer(this.player).then(() => {
       ingredientArr.forEach(loot => {
       this.playerSvc.deleteLoot(this.playerloot.find(q => q.name === loot.name).playerLootId).then(() => {
-        this.getPlayer(2);
+        this.update();
 
       });
     });
