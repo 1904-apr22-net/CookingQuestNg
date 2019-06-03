@@ -35,10 +35,10 @@ export class StoreComponent implements OnInit {
     this.getPlayerLoot(2);
     this.getEquipment();
     this.getPlayerEquipment(2);
-
+    this.update();
   }
 
-  update(){
+  update() {
     this.getStores();
     this.getPlayer(2);
     this.getPlayerLoot(2);
@@ -58,7 +58,7 @@ export class StoreComponent implements OnInit {
       // this.equipment = res.filter(w => w.type !== 'Voucher');
                                                       this.voucher = res.filter(q => q.type === 'Voucher').reduce(this.equipmentReducer);
                                                       this.stores = this.stores.filter(z => z.difficulty <= this.voucher.difficulty);
-                                                      this.update();
+
                                                       // this.storeSvc.getAllEquipment().
                                                       // then(res2 => this.allEquipment = res2.filter
                                                       // (r => this.equipment.filter(e => e.name !== r.name).length > 0));
